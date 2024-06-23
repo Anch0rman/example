@@ -23,9 +23,7 @@ Route::get('/jobs/create', function () {
 });
 
 // Show
-Route::get('/jobs/{id}', function ($id) {
-    $job = Job::find($id);
-
+Route::get('/jobs/{job}', function (Job $job) {
     return view('jobs.show', ['job' => $job]);
 });
 
@@ -46,9 +44,7 @@ Route::post('/jobs', function () {
 });
 
 // Edit
-Route::get('/jobs/{id}/edit', function ($id) {
-    $job = Job::find($id);
-
+Route::get('/jobs/{job}/edit', function (Job $job) {
     return view('jobs.edit', ['job' => $job]);
 });
 
@@ -61,16 +57,15 @@ Route::patch('/jobs/{job}', function (Job $job) {
 
     // authorize (on hold...)
 
-    $job->title = request('title');
-    $job->salary = request('salary');
+    $job->update([
+        'title' => request('title'),
+        'salary' => request('salary')
+    ]);
 
     // alternative way to update
-    // $job->update([
-    //     'title' => request('title'),
-    //     'salary' => request('salary')
-    // ]);
-    
-    $job->save();
+    // $job->title = request('title');
+    // $job->salary = request('salary');
+    // $job->save();
 
     return redirect('/jobs/' . $job->id); 
 });
