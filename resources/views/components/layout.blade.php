@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-compatible" content="ie=edge">
 
     <title>Home Page</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    @vite(['resources/js/app.js'])
 </head>
 <body class="h-full">
 <div class="min-h-full">
